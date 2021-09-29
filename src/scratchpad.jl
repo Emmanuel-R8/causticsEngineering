@@ -17,7 +17,8 @@ image = Images.load("./examples/personal/caricature.jpg"); # Check current worki
 image = Images.load("./examples/personal/image.jpg"); # Check current working directory with pwd()
 image = Images.load("./examples/personal/bilal.jpg"); # Check current working directory with pwd()
 
-mesh, imageBW = engineer_caustics(image; clamp_correction = true);
+mesh, imageBW = engineer_caustics(image);
+
 
 
 imageBW = Float64.(Gray.(image));
