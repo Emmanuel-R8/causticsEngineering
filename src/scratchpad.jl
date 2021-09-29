@@ -329,7 +329,13 @@ CausticsEngineering.field_summary(mesh.corners.ϕ[1:end-1, 1:end-1] - origϕ')
 CausticsEngineering.field_summary(mesh.corners.ϕ[2:end, 1:end-1] - origϕ')
 CausticsEngineering.field_summary(mesh.corners.ϕ[1:end-1, 2:end] - origϕ')
 CausticsEngineering.field_summary(mesh.corners.ϕ[2:end, 2:end] - origϕ')
-m = (mesh.corners.ϕ[1:end-1, 1:end-1] + mesh.corners.ϕ[2:end, 1:end-1] + mesh.corners.ϕ[1:end-1, 2:end] + mesh.corners.ϕ[2:end, 2:end]) / 4.;
+m =
+    (
+        mesh.corners.ϕ[1:end-1, 1:end-1] +
+        mesh.corners.ϕ[2:end, 1:end-1] +
+        mesh.corners.ϕ[1:end-1, 2:end] +
+        mesh.corners.ϕ[2:end, 2:end]
+    ) / 4.0;
 CausticsEngineering.field_summary(m - origϕ')
 
 
