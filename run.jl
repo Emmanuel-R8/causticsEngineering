@@ -13,9 +13,8 @@ Pkg.add([
 Pkg.develop(path = @__DIR__)
 
 using Revise, Images
-
 using CausticsEngineering
 
 # Check current working directory with pwd()
-image = Images.load("./examples/personal/caricature.jpg")
+image = Images.load("./examples/personal/statue_of_liberty_1.jpg")
 engineer_caustics(image);

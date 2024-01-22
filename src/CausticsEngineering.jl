@@ -21,6 +21,8 @@ include("plots.jl")
 
 include("create_mesh.jl")
 
+include("high_contrast.jl")
+
 
 
 """
