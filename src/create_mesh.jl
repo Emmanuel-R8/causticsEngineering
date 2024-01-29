@@ -24,7 +24,6 @@ function engineer_caustics(source_image)
     # imageBW is normalised to have 1 unit per pixel on average.
     imageBW /= average(imageBW)
 
-    marginal_change = nothing
     max_update = Inf
     counter = 0
     while (abs(max_update) > 1e-6 && counter < 4)
@@ -239,13 +238,8 @@ function solve_height_potential(mesh::FaceMesh, image; f = Focal_Length)
     # N_row/N_col are _POSTS_SIZED_
     N_row = zeros(Float64, size(true_H))
     N_col = zeros(Float64, size(true_H))
-    N_row = tan.(atan.(d_row ./ true_H) / (n₁ - n₂))
-    N_col = tan.(atan.(d_col ./ true_H) / (n₁ - n₂))
-
-    # @. N_row[1:end, 1:end] =
-    #     tan(atan(d_row[1:end, 1:end] / true_H[1:end, 1:end]) / (n₁ - n₂))
-    # @. N_col[1:end, 1:end] =
-    #     tan(atan(d_col[1:end, 1:end] / true_H[1:end, 1:end]) / (n₁ - n₂))
+    N_row = tan.(atan.(d_row ./ true_H) / Δn)
+    N_col = tan.(atan.(d_col ./ true_H) / Δn)
 
     # We need to find the divergence of the Vector field described by Nx and Ny
     # div_row/div_col are _FENCES_SIZED_

@@ -58,7 +58,7 @@ function testAreaTriangle(x1, y1, x2, y2, x3, y3)
     return surface_sq <= 1e-100 ? 0.0 : surface_sq
 end
 
-function doTestAreaTriangle(N = 10_000)
+function doTestAreaTriangle(N=10_000)
     X1 = 10_000 .* rand(N)
     Y1 = 10_000 .* rand(N)
     X2 = 10_000 .* rand(N)

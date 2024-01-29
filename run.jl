@@ -11,6 +11,10 @@ Pkg.add([
 ])
 
 Pkg.develop(path = @__DIR__)
+Pkg.add([
+    "CausticsEngineering"
+])
+
 
 using Revise, Images
 using CausticsEngineering

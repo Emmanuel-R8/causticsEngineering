@@ -80,8 +80,8 @@ function plot_as_quiver(
         reverser && (dr = -dr)
         reversec && (dc = -dc)
 
-        push!(Δrow, clamp(dr, -maxlength, max_length))
-        push!(Δcol, clamp(dc, -maxlength, max_length))
+        push!(Δrow, clamp(dr, -max_length, max_length))
+        push!(Δcol, clamp(dc, -max_length, max_length))
     end
 
     # By default, we flip to match the original image.

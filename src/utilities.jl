@@ -231,7 +231,7 @@ $(SIGNATURES)
 
 Converts a triangle as a triplet of references to mesh vertices to a triplet of 3D coordinates.
 """
-function triangle3D(mesh::FaceMesh, row::Int, col::Int, side = Union{:top,:bottom})
+function triangle3D(mesh::FaceMesh, row::Int, col::Int, side=Union{:top,:bottom})
     height, width = size(mesh)
     max_distance_squared = (height + 1)^2 + (width + 1)^2
 
@@ -258,7 +258,7 @@ function triangle3D(mesh::FaceMesh, row::Int, col::Int, side = Union{:top,:botto
     end
 end
 
-triangle3D(mesh::FaceMesh, ci::CartesianIndex{2}, side = Union{:top,:bottom}) =
+triangle3D(mesh::FaceMesh, ci::CartesianIndex{2}, side=Union{:top,:bottom}) =
     triangle3D(mesh, ci[1], ci[2], side)
 
 
@@ -267,7 +267,7 @@ $(SIGNATURES)
 
 Centroid of a specific mesh triangle.
 """
-function centroid(mesh::FaceMesh, ci::CartesianIndex; side = Union{:top,:bottom})
+function centroid(mesh::FaceMesh, ci::CartesianIndex; side=Union{:top,:bottom})
     if side == :top
         return centroid(top_triangle3D(mesh, ci)...)
     elseif side == :bottom
@@ -282,7 +282,7 @@ $(SIGNATURES)
 
 Centroid of a specific mesh triangle.
 """
-function centroid(mesh::FaceMesh, row::Int, col::Int; side = Union{:top,:bottom})
+function centroid(mesh::FaceMesh, row::Int, col::Int; side=Union{:top,:bottom})
     if side == :top
         return centroid(top_triangle3D(mesh, row, col)...)
     elseif side == :bottom
@@ -295,7 +295,7 @@ end
 """
 $(SIGNATURES)
 """
-function area(mesh::FaceMesh, ci::CartesianIndex; side = Union{:top,:bottom})
+function area(mesh::FaceMesh, ci::CartesianIndex; side=Union{:top,:bottom})
     if side == :top
         return area(top_triangle3D(mesh, ci)...)
     elseif side == :bottom
@@ -308,7 +308,7 @@ end
 """
 $(SIGNATURES)
 """
-function area(mesh::FaceMesh, row::Int, col::Int; side = Union{:top,:bottom})
+function area(mesh::FaceMesh, row::Int, col::Int; side=Union{:top,:bottom})
     if side == :top
         return area(top_triangle3D(mesh, row, col)...)
     elseif side == :bottom
@@ -357,11 +357,11 @@ $(SIGNATURES)
 
 """
 function field_summary(field, fieldname)
-    s = round(sum(field), sigdigits = 6)
-    max = round(maximum(field), sigdigits = 4)
-    min = round(minimum(field), sigdigits = 4)
-    avg = round(average(field), sigdigits = 4)
-    abs = round(average_absolute(field), sigdigits = 4)
+    s = round(sum(field), sigdigits=6)
+    max = round(maximum(field), sigdigits=4)
+    min = round(minimum(field), sigdigits=4)
+    avg = round(average(field), sigdigits=4)
+    abs = round(average_absolute(field), sigdigits=4)
 
     return """$(fieldname) (Sum/Max/Min/Avg/Avg abs.): $(s) / $(max) / $(min) / $(avg) / $(abs)"""
 end

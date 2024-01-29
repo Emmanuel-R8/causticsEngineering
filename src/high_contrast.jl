@@ -26,10 +26,10 @@ using Random
 
 # The meshes start with MESH_LENGTH x MESH_LENGTH points
 const MESH_LENGTH = 16
-const UNIT_RECT = Rectangle(GeometryBasics.Point2(0, 0), GeometryBasics.Point2(1, 1))
+const UNIT_RECT = Rectangle(Point2(0, 0), Point2(1, 1))
 
 # First create a mesh where all the points are regularly spaced.
-regular_points = reshape([GeometryBasics.Point2(-0.05 + i / MESH_LENGTH, -0.05 + j / MESH_LENGTH) for i in 1:MESH_LENGTH, j in 1:MESH_LENGTH], :)
+regular_points = reshape([Point2(-0.05 + i / MESH_LENGTH, -0.05 + j / MESH_LENGTH) for i in 1:MESH_LENGTH, j in 1:MESH_LENGTH], :)
 regular_tesselation = voronoicells(regular_points, UNIT_RECT)
 
 function plot_tess(points, resselation)
@@ -58,7 +58,7 @@ function high_contrast_caustics(source, otm)
     not_converged = false
     while not_converged
         d = normalize(target_position - vertex)
-        n = fresnel_mapping(src, d)
+        n = fresnel_mapping(source, d)
         vertex = normal_integration(x, n)
     end
 

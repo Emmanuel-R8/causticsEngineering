@@ -1,24 +1,37 @@
+# Work in a temporary environment
+using Pkg
+Pkg.activate(; temp=true)
+
+# Speed up by avoiding updating the repository when adding packages
+Pkg.UPDATED_REGISTRY_THIS_SESSION[] = true
+Pkg.develop(path="$(@__DIR__)/..")
+
+# Add useful package
+Pkg.add([
+    "Revise", "Images", "Plots", "Debugger"
+])
+
+
 using Revise, Debugger
 using Images, Plots
 gr()
 
 using CausticsEngineering
 
-image = Images.load("./examples/personal/slashdot.jpg"); # Check current working directory with pwd()
+image = Images.load("./examples/personal/slashdot.jpg") # Check current working directory with pwd()
 
-image = Images.load("./examples/cat_posing.jpg"); # Check current working directory with pwd()
-image = Images.load("./examples/personal/goose.jpg"); # Check current working directory with pwd()
+image = Images.load("./examples/cat_posing.jpg") # Check current working directory with pwd()
+image = Images.load("./examples/personal/goose.jpg") # Check current working directory with pwd()
 
-image = Images.load("./examples/personal/salvador_dali_1.jpg"); # Check current working directory with pwd()
-image = Images.load("./examples/personal/salvador_dali_2.jpg"); # Check current working directory with pwd()
+image = Images.load("./examples/personal/salvador_dali_1.jpg") # Check current working directory with pwd()
+image = Images.load("./examples/personal/salvador_dali_2.jpg") # Check current working directory with pwd()
 
-image = Images.load("./examples/personal/statue_of_liberty_1.jpg"); # Check current working directory with pwd()
-image = Images.load("./examples/personal/statue_of_liberty_2.jpg"); # Check current working directory with pwd()
-image = Images.load("./examples/personal/statue_of_liberty_3.jpg"); # Check current working directory with pwd()
+image = Images.load("./examples/personal/statue_of_liberty_1.jpg") # Check current working directory with pwd()
+image = Images.load("./examples/personal/statue_of_liberty_2.jpg") # Check current working directory with pwd()
+image = Images.load("./examples/personal/statue_of_liberty_3.jpg") # Check current working directory with pwd()
 
-image = Images.load("./examples/personal/caricature.jpg"); # Check current working directory with pwd()
-image = Images.load("./examples/personal/portrait.jpg"); # Check current working directory with pwd()
-image = Images.load("./examples/personal/bilal.jpg"); # Check current working directory with pwd()
+image = Images.load("./examples/personal/bilal.jpg") # Check current working directory with pwd()
+image = Images.load("./examples/personal/caricature.jpg") # Check current working directory with pwd()
 
 mesh, imageBW = engineer_caustics(image);
 
