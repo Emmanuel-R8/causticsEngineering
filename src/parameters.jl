@@ -3,7 +3,7 @@
 # Physical parameters
 
 ## Materials
-const n₁::Float64 = 1.49  # acrylate
+const n₁::Float64 = 1.584  # https://pixelandpoly.com/ior.html - polycarbonate
 const n₂::Float64 = 1.00  # air
 const Δn::Float64 = n₁ - n₂  # Change
 

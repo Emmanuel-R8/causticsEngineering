@@ -34,10 +34,10 @@ function save_obj!(
     triangle_index,
     vertex_index::AbstractMatrix{Float64},
     filename::String;
-    scale=1.0,
-    scaleh=1.0,
-    reverse=false,
-    flipxy=false,
+    scale = 1.0,
+    scaleh = 1.0,
+    reverse = false,
+    flipxy = false,
 )
 
     open(filename, "w") do io

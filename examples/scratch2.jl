@@ -1,22 +1,18 @@
 # Work in a temporary environment
 using Pkg
-Pkg.activate(; temp=true)
+Pkg.activate(; temp = true)
 
 # Speed up by avoiding updating the repository when adding packages
 Pkg.UPDATED_REGISTRY_THIS_SESSION[] = true
-Pkg.develop(path="$(@__DIR__)/..")
+Pkg.develop(path = "$(@__DIR__)/..")
 
 # Add useful package
-Pkg.add([
-    "Revise", "Images"
-])
+Pkg.add(["Revise", "Images"])
 
 using Revise, Images
 using CausticsEngineering
 
-Pkg.add([
-    "VoronoiCells", "GeometryBasics", "Plots", "Random", "ImageMagick"
-])
+Pkg.add(["VoronoiCells", "GeometryBasics", "Plots", "Random", "ImageMagick"])
 
 using Random
 
@@ -29,15 +25,25 @@ using Plots
 MESH_LENGTH = 16
 
 # First create a mesh where all the points are regularly spaced.
-regular_points = reshape([
-    GeometryBasics.Point2(-0.05 + i / MESH_LENGTH, -0.05 + j / MESH_LENGTH)
-    for i in 1:MESH_LENGTH, j in 1:MESH_LENGTH], :)
-regular_tess = voronoicells(regular_points, Rectangle(GeometryBasics.Point2(0, 0), GeometryBasics.Point2(1, 1)))
+regular_points = reshape(
+    [
+        GeometryBasics.Point2(-0.05 + i / MESH_LENGTH, -0.05 + j / MESH_LENGTH) for
+        i = 1:MESH_LENGTH, j = 1:MESH_LENGTH
+    ],
+    :,
+)
+regular_tess = voronoicells(
+    regular_points,
+    Rectangle(GeometryBasics.Point2(0, 0), GeometryBasics.Point2(1, 1)),
+)
 
 begin
-    scatter(regular_points, markersize=2, label="generators")
-    annotate!([(regular_points[n][1] + 0.02, regular_points[n][2] + 0.03, Plots.text(n)) for n in 1:MESH_LENGTH])
-    plot!(regular_tess, legend=:topleft)
+    scatter(regular_points, markersize = 2, label = "generators")
+    annotate!([
+        (regular_points[n][1] + 0.02, regular_points[n][2] + 0.03, Plots.text(n)) for
+        n = 1:MESH_LENGTH
+    ])
+    plot!(regular_tess, legend = :topleft)
 end
 
 
@@ -50,11 +56,19 @@ imgf32 = Float32.(img)'
 x_max, y_max = size(imgf32)
 irr_per_point = sum(imgf32) / MESH_LENGTH^2
 
-centroids = reshape([
-    GeometryBasics.Point2((-0.05 + i / MESH_LENGTH) * x_max, (-0.05 + j / MESH_LENGTH) * y_max)
-    for i in 1:MESH_LENGTH, j in 1:MESH_LENGTH
-], :)
-tess = voronoicells(centroids, Rectangle(GeometryBasics.Point2(0, 0), GeometryBasics.Point2(x_max, y_max)))
+centroids = reshape(
+    [
+        GeometryBasics.Point2(
+            (-0.05 + i / MESH_LENGTH) * x_max,
+            (-0.05 + j / MESH_LENGTH) * y_max,
+        ) for i = 1:MESH_LENGTH, j = 1:MESH_LENGTH
+    ],
+    :,
+)
+tess = voronoicells(
+    centroids,
+    Rectangle(GeometryBasics.Point2(0, 0), GeometryBasics.Point2(x_max, y_max)),
+)
 
 # For each cell, being a polygon
 for _ = 1:10
@@ -140,27 +154,33 @@ for _ = 1:10
     end
 
     centroids = [c for c ∈ new_centroids]
-    tess = voronoicells(centroids, Rectangle(GeometryBasics.Point2(0, 0), GeometryBasics.Point2(x_max, y_max)))
+    tess = voronoicells(
+        centroids,
+        Rectangle(GeometryBasics.Point2(0, 0), GeometryBasics.Point2(x_max, y_max)),
+    )
 end
 
 begin
-    scatter(centroids, markersize=2, label="")
+    scatter(centroids, markersize = 2, label = "")
     # annotate!([(regular_points[n][1] + 0.02, regular_points[n][2] + 0.03, Plots.text(n)) for n in 1:MESH_LENGTH])
-    plot!(tess, legend=:topleft)
+    plot!(tess, legend = :topleft)
 end
 #
 
 
 
-function image_to_tesselation(filename::String; mesh_length=MESH_LENGTH)
+function image_to_tesselation(filename::String; mesh_length = MESH_LENGTH)
     # Load an image and converts to gray scale
     img = Gray.(Images.load(filename))
 
     # Initial equally spaced centroids
-    tess = reshape([
-        GeometryBasics.Point2(-0.05 + i / MESH_LENGTH, -0.05 + j / MESH_LENGTH)
-        for i in 1:MESH_LENGTH, j in 1:MESH_LENGTH
-    ], :)
+    tess = reshape(
+        [
+            GeometryBasics.Point2(-0.05 + i / MESH_LENGTH, -0.05 + j / MESH_LENGTH) for
+            i = 1:MESH_LENGTH, j = 1:MESH_LENGTH
+        ],
+        :,
+    )
 
 
 end
@@ -171,12 +191,12 @@ end
 
 # The next mesh has all points randomly positioned.
 rng = Random.MersenneTwister(1337)
-points = [Point2(rand(rng), rand(rng)) for _ in 1:MESH_LENGTH^2]
+points = [Point2(rand(rng), rand(rng)) for _ = 1:MESH_LENGTH^2]
 tess = voronoicells(points, Rectangle(Point2(0, 0), Point2(1, 1)));
 
 
 begin
-    scatter(points, markersize=2, label="generators")
-    annotate!([(points[n][1] + 0.02, points[n][2] + 0.03, Plots.text(n)) for n in 1:10])
-    plot!(tess, legend=:topleft)
+    scatter(points, markersize = 2, label = "generators")
+    annotate!([(points[n][1] + 0.02, points[n][2] + 0.03, Plots.text(n)) for n = 1:10])
+    plot!(tess, legend = :topleft)
 end

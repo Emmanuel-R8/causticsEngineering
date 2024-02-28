@@ -6,14 +6,10 @@ Pkg.activate(; temp = true)
 Pkg.UPDATED_REGISTRY_THIS_SESSION[] = true
 
 # Add useful package
-Pkg.add([
-    "Revise", "Images"
-])
+Pkg.add(["Revise", "Images"])
 
 Pkg.develop(path = @__DIR__)
-Pkg.add([
-    "CausticsEngineering"
-])
+Pkg.add(["CausticsEngineering"])
 
 
 using Revise, Images

@@ -1,15 +1,13 @@
 # Work in a temporary environment
 using Pkg
-Pkg.activate(; temp=true)
+Pkg.activate(; temp = true)
 
 # Speed up by avoiding updating the repository when adding packages
 Pkg.UPDATED_REGISTRY_THIS_SESSION[] = true
-Pkg.develop(path="$(@__DIR__)/..")
+Pkg.develop(path = "$(@__DIR__)/..")
 
 # Add useful package
-Pkg.add([
-    "Revise", "Images", "Plots", "Debugger"
-])
+Pkg.add(["Revise", "Images", "Plots", "Debugger"])
 
 
 using Revise, Debugger

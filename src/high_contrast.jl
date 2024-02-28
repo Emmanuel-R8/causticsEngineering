@@ -25,17 +25,29 @@ using Random
 
 
 # The meshes start with MESH_LENGTH x MESH_LENGTH points
-const MESH_LENGTH = 16
+const MESH_LENGTH::Float64 = 16
 const UNIT_RECT = Rectangle(Point2(0, 0), Point2(1, 1))
 
 # First create a mesh where all the points are regularly spaced.
-regular_points = reshape([Point2(-0.05 + i / MESH_LENGTH, -0.05 + j / MESH_LENGTH) for i in 1:MESH_LENGTH, j in 1:MESH_LENGTH], :)
+regular_points = reshape(
+    [
+        Point2(-0.05 + i / MESH_LENGTH, -0.05 + j / MESH_LENGTH) for i = 1:MESH_LENGTH,
+        j = 1:MESH_LENGTH
+    ],
+    :,
+)
 regular_tesselation = voronoicells(regular_points, UNIT_RECT)
 
 function plot_tess(points, resselation)
-    p = scatter(points, markersize=2, label="generators")
-    annotate!(p, [(points[n][1] + 0.02, points[n][2] + 0.03, Plots.text(n)) for n in 1:length(points)])
-    return plot!(tesselation, legend=:topleft)
+    p = scatter(points, markersize = 2, label = "generators")
+    annotate!(
+        p,
+        [
+            (points[n][1] + 0.02, points[n][2] + 0.03, Plots.text(n)) for
+            n = 1:length(points)
+        ],
+    )
+    return plot!(tesselation, legend = :topleft)
 end
 
 
