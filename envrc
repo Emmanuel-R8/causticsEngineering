@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+
+# rename to .envrc and run direnv allow in the shell i
+
+use flake
+
+
+

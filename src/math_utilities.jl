@@ -1,4 +1,3 @@
-
 """
 $(SIGNATURES)
 """
@@ -8,7 +7,7 @@ average(m::AbstractMatrix) = (sum(m) / length(m))
 """
 $(SIGNATURES)
 """
-average_absolute(m::AbstractMatrix) = (sum(abs.(m)) / length(m))
+average_absolute(m::AbstractMatrix) = (sum(abs, m) / length(m))
 
 
 """

@@ -1,11 +1,9 @@
-
 """
 $(SIGNATURES)
 
 """
 function engineer_caustics(source_image)
     imageBW = Float64.(Gray.(source_image))
-
 
     # Set global size parameters
     height, width = size(imageBW)
@@ -57,12 +55,12 @@ function engineer_caustics(source_image)
 
           """,
         )
-        plot_as_quiver(mesh, n_steps = 50, scale = height / 10, max_length = height / 20)
+        plot_as_quiver(mesh, n_steps=50, scale=height / 10, max_length=height / 20)
     end
 
     println("\nSTARTING HORIZONTAL ITERATION ---")
 
-    max_update = solve_height_potential(mesh, imageBW; f = Focal_Length)
+    max_update = solve_height_potential(mesh, imageBW; f=Focal_Length)
     println("\t Horizontal max update = $(max_update)")
 
     # Move the around a nil average.
@@ -209,7 +207,7 @@ end
 """
 $(SIGNATURES)
 """
-function solve_height_potential(mesh::FaceMesh, image; f = Focal_Length)
+function solve_height_potential(mesh::FaceMesh, image; f=Focal_Length)
     # height indexes rows, width indexes columns
     height, width = size(mesh)
 

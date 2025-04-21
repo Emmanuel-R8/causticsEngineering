@@ -1,16 +1,28 @@
-# Caustics Engineering
+# A FHS for Scientific Computing (and specifically Julia)
 
-This repo is for generating 3D surface meshes that project caustic images. It is written in Julia.
+This provides a [home-manager](https://github.com/nix-community/home-manager) module that you can use in your flake-based nixos config.
 
-See the write-up [here](https://mattferraro.dev/posts/caustics-engineering)!
+Example usage in a flake-based home-manager setup
 
-# To Run
+```nix
+# in flake.nix
 
-To run the cat example from the blogpost, run line by line from ` src/scratchpad.jl`.
+inputs.scientific-fhs.url = "github:olynch/scientific-fhs"
 
-_OR_ from the command line.
+# in home-manager config
 
+imports = [ inputs.scientific-fhs.nixosModules.default ];
+
+programs.scientific-fhs = {
+  enable = true;
+  juliaVersions = [
+    {
+      version = "julia_18";
+      default = true;
+    }
+    { version = "julia_17"; }
+    { version = "julia_16"; }
+  ];
+  enableNVIDIA = false;
+};
 ```
-julia ./run.jl"
-```
-The image file is currently hard-coded.

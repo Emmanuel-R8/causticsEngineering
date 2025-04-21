@@ -9,6 +9,7 @@ const Δn::Float64 = n₁ - n₂  # Change
 
 ## The sides of the block to be carved
 const Block_Side::Float64 = 0.15 # meters
+
 ## Square block
 const Block_Height::Float64 = Block_Side
 const Block_Width::Float64 = Block_Side

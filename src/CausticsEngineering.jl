@@ -1,27 +1,13 @@
 module CausticsEngineering
 
 using DocStringExtensions
-using Random, Images
 
-using Plots
+using Images, Plots
 gr()
 
-using Meshes, FileIO, MeshIO
-
-
-include("../examples/personal/original.jl")
-
+# using Meshes, FileIO, MeshIO
 
 include("parameters.jl")
-include("utilities.jl")
-include("math_utilities.jl")
-include("mesh.jl")
-include("io.jl")
-include("plots.jl")
-
-include("create_mesh.jl")
-
-include("high_contrast.jl")
 
 
 
@@ -42,31 +28,31 @@ export
     Top_Offset,
 
     # Types
-    Vertex3D,
-    FieldVertex3D,
-    FaceMesh,
+    # Vertex3D,
+    # FieldVertex3D,
+    # FaceMesh,
 
     # math
-    average,
-    average_absolute,
-    laplacian,
-    ∇,
+    # average,
+    # average_absolute,
+    # laplacian,
+    # ∇,
 
     # Mesh
-    create_solid,
-    create_solid_as_dict,
-    get_lens_pixels_area,
+    # create_solid,
+    # create_solid_as_dict,
+    # get_lens_pixels_area,
 
     # Plotting
-    plot_as_quiver,
+    # plot_as_quiver,
 
     # I/O
-    save_obj!,
+    # save_obj!,
 
     # Main procedures
-    propagate_poisson!,
-    march_mesh!,
-    engineer_caustics,
+    # propagate_poisson!,
+    # march_mesh!,
+    # engineer_caustics,
     main
 
 
