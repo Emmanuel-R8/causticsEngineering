@@ -2,7 +2,7 @@
   lib,
   pkgs,
   enableJulia ? true,
-  juliaVersion ? "1.10.1",
+  juliaVersion ? "1.11.5",
   enableConda ? false,
   enablePython ? false,
   enableQuarto ? true,
@@ -34,6 +34,7 @@ with lib; let
         libxml2
         m4
         nss
+        openspecfun
         openssl
         stdenv.cc
         unzip
@@ -61,7 +62,7 @@ with lib; let
       gettext
       glfw
       glib
-      # glib.out
+      glib.out
       # gnome2.GConf
       # gtk2
       # gtk2-x11
@@ -82,9 +83,9 @@ with lib; let
       nspr
       nss
       pango
-      # pango.out
+      pango.out
       pdf2svg
-      # systemd
+      systemd
       vulkan-loader
       vulkan-headers
       vulkan-validation-layers
@@ -114,12 +115,11 @@ with lib; let
       xorgproto
     ]);
 
-  nvidiaPackages = pkgs:
-    with pkgs; [
-      cudatoolkit_11
-      cudnn_cudatoolkit_11
-      linuxPackages.nvidia_x11
-    ];
+  nvidiaPackages = pkgs: (with pkgs; [
+    cudatoolkit_11
+    cudnn_cudatoolkit_11
+    linuxPackages.nvidia_x11
+  ]);
 
   quartoPackages = pkgs: let
     quarto = pkgs.callPackage ./quarto.nix {rWrapper = null;};
@@ -128,23 +128,22 @@ with lib; let
   condaPackages = pkgs:
     with pkgs; [(callPackage ./conda.nix {installationPath = condaInstallationPath;})];
 
-  pythonPackages = pkgs:
-    with pkgs; [
-      (python3.withPackages (ps:
-        with ps; [
-          poetry
+  pythonPackages = pkgs: (with pkgs; [
+    (python3.withPackages (ps:
+      with ps; [
+        poetry
 
-          jupyter
-          jupyterlab
-          numpy
-          scipy
-          pandas
-          matplotlib
-          scikit-learn
-          tox
-          pygments
-        ]))
-    ];
+        jupyter
+        jupyterlab
+        numpy
+        scipy
+        pandas
+        matplotlib
+        scikit-learn
+        tox
+        pygments
+      ]))
+  ]);
 
   targetPkgs = pkgs:
     (standardPackages pkgs)
@@ -190,7 +189,7 @@ with lib; let
     + optionalString (enableConda && enableJulia) conda_julia_envvars
     + optionalString enableNVIDIA nvidia_envvars;
 
-  multiPkgs = pkgs: with pkgs; [zlib];
+  multiPkgs = pkgs: (with pkgs; [zlib]);
 
   condaInitScript = ''
     conda-install

@@ -22,7 +22,7 @@ in {
       });
       default = [
         {
-          version = "1.10.3";
+          version = "1.11.4";
           default = true;
         }
       ];
@@ -41,7 +41,7 @@ in {
 
   config = {
     home.packages = builtins.concatMap (version-spec: let
-      scientific-fhs = pkgs.callPackage ./fhs.nix {
+      scientific-fhs = pkgs.callPackage scientific-nix/fhs.nix {
         enableNVIDIA = cfg.enableNVIDIA;
         enableGraphical = cfg.enableGraphical;
         juliaVersion = version-spec.version;
@@ -76,6 +76,7 @@ in {
         else [];
     in
       [(fhsCommand name "julia") (fhsCommand "${name}-bash" "bash")]
-      ++ python ++ quarto) cfg.juliaVersions;
+      ++ python ++ quarto)
+    cfg.juliaVersions;
   };
 }

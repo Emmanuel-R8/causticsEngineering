@@ -34,6 +34,7 @@ Manifest.toml
 *.temp
 
 *sync-conflict*
+.ipynb_checkpoints/
 src/debug_script.jl
 examples/personal
 examples/*.png
