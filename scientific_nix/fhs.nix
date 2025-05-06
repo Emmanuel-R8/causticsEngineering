@@ -91,6 +91,8 @@ with lib; let
       vulkan-validation-layers
       wayland # for Julia
       zlib
+
+      vscode
     ])
     ++ (with pkgs.xorg; [
       libICE
