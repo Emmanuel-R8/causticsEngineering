@@ -92,7 +92,7 @@ with lib; let
       wayland # for Julia
       zlib
 
-      vscode
+
     ])
     ++ (with pkgs.xorg; [
       libICE

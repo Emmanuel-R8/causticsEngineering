@@ -2,6 +2,7 @@
   outputs = {nixpkgs, ...}: let
     pkgs = import nixpkgs {system = "x86_64-linux";};
   in {
+    nixpkgs.config.allowUnfree = true; 
     nixosModules.default = import ./scientific-nix/module.nix;
     packages.x86_64-linux.scientific-fhs = pkgs.callPackage ./scientific_nix/fhs.nix {
       enableNVIDIA = false;
